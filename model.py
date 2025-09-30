@@ -8,12 +8,21 @@ Animals
 from mesa import Model
 from mesa.datacollection import DataCollector
 from mesa.discrete_space import OrthogonalMooreGrid
-from agents import Animal
+from agents import Carrier, Giver
+import numpy as np
+
+def compute_avg_fitness(model):
+    return np.average([agent.fitness for agent in model.agents])
+
+def get_population(model):
+    return len(model.agents)
 
 class Fitness(Model):
-    """A simple model of an ecosystem where agents eat and die.
+    """A simple model of an ecosystem where agents eat, mate, and die.
 
-    All agents begin with eight units of energy, and each time step agents gain energy based on their fitness.
+    All agents begin with around 25 units of energy and each step is one day.
+
+    Matings are random and from mating to birth is 270 days (~9 months).
 
     Attributes:
         num_agents (int): Number of agents in the model
@@ -33,14 +42,27 @@ class Fitness(Model):
         """
         super().__init__(seed=seed)
 
-        self.num_agents = n
+        self.num_agents = int(n/2)
         self.grid = OrthogonalMooreGrid((width, height), random=self.random)
 
         # Set up data collection
         self.datacollector = DataCollector(
-            agent_reporters={"Energy": "energy", "Fitness": "fitness"},
+            model_reporters={
+                "Avg Fitness": compute_avg_fitness,
+                "Population": lambda m: len(m.agents),
+                "Carriers": lambda m: len(m.agents_by_type[Carrier]),
+                "Givers": lambda m: len(m.agents_by_type[Giver]),
+            },
+            agent_reporters={"Energy": "energy", "Fitness": "fitness", "Role": "role"}
         )
-        Animal.create_agents(
+        Carrier.create_agents(
+            self,
+            self.num_agents,
+            energy=25,
+            cell=self.random.choices(self.grid.all_cells.cells, k=self.num_agents),
+        )
+
+        Giver.create_agents(
             self,
             self.num_agents,
             energy=25,
