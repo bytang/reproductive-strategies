@@ -3,7 +3,7 @@ from mesa.discrete_space import CellAgent
 class Animal(CellAgent):
     """The base animal class."""
 
-    def __init__(self, model, parents=None, fitness=None, energy=10, cell=None):
+    def __init__(self, model, parents=None, fitness=None, adult=True, energy=10, cell=None):
         """Initialize an animal.
 
         Args:
@@ -13,13 +13,15 @@ class Animal(CellAgent):
         """
         super().__init__(model)
         self.energy = self.random.normalvariate(energy, energy/10)
-        self.energy_max = 2 * energy
+        self.energy_max = 50
         self.cell = cell
+        self.adult = adult
+        self.lifetime = 0
         self.fitness = fitness if fitness is not None else self.random.normalvariate()
         self.parents = parents
 
     def feed(self):
-        if self.fitness > self.random.normalvariate(-0.5):
+        if self.fitness > self.random.normalvariate(self.model.habitability):
             self.energy = min(self.energy + 2, self.energy_max)
 
     def mate(self):
@@ -42,16 +44,21 @@ class Animal(CellAgent):
         if self.energy <= 0:
             self.remove()
         else:
-            self.feed()
+            self.lifetime += 1
+            if self.lifetime > 30:
+                self.adult = True
+            if self.adult:
+                self.feed()
 
 class Carrier(Animal):
     """"""
-    def __init__(self, model, parents=None, fitness=None, energy=10, cell=None):
-        super().__init__(model, parents, fitness, energy, cell)
+    def __init__(self, model, parents=None, fitness=None, adult=True, energy=10, cell=None):
+        super().__init__(model, parents, fitness, adult, energy, cell)
         self.carrying = False
         self.carry = {
             'time': 0,
             'fitness': 0,
+            'energy_reserve': 0,
             'mature': 270,
             'parents': None
         }
@@ -62,9 +69,14 @@ class Carrier(Animal):
             choices = [obj for obj in self.cell.agents if isinstance(obj, Giver)]
             if len(choices):
                 partner = self.random.choice(choices)
+                crossover_ratio = self.model.dist.cdf(self.random.normalvariate())
                 self.carrying = True
-                self.carry['fitness'] = self.random.normalvariate((self.fitness + partner.fitness) / 2)
+                if self.model.mutation and self.random.uniform(0, 1) < 0.05:
+                    self.carry['fitness'] = self.random.normalvariate()
+                else:
+                    self.carry['fitness'] = crossover_ratio * self.fitness + (1 - crossover_ratio) * partner.fitness
                 self.carry['time'] = 0
+                self.carry['energy_reserve'] = 0
                 self.carry['parents'] = [self.unique_id, partner.unique_id]
 
     def metabolism(self):
@@ -72,6 +84,7 @@ class Carrier(Animal):
         if self.carrying:
             if self.carry['time'] < self.carry['mature']:
                 self.carry['time'] += 1
+                self.carry['energy_reserve'] += 0.25
             else:
                 self.carrying = False
                 role = self.random.choice(['carrier', 'giver'])
@@ -80,7 +93,8 @@ class Carrier(Animal):
                         self.model,
                         self.carry['parents'],
                         self.carry['fitness'],
-                        25,
+                        False,
+                        self.carry['energy_reserve'],
                         self.cell
                     )
                 else:
@@ -88,14 +102,15 @@ class Carrier(Animal):
                         self.model,
                         self.carry['parents'],
                         self.carry['fitness'],
-                        25,
+                        False,
+                        self.carry['energy_reserve'],
                         self.cell
                     )
 
 class Giver(Animal):
     """"""
-    def __init__(self, model, parents=None, fitness=None, energy=10, cell=None):
-        super().__init__(model, parents, fitness, energy, cell)
+    def __init__(self, model, parents=None, fitness=None, adult=True, energy=10, cell=None):
+        super().__init__(model, parents, fitness, adult, energy, cell)
         self.role = 'giver'
     
     def metabolism(self):

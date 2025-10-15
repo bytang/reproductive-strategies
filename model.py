@@ -10,12 +10,16 @@ from mesa.datacollection import DataCollector
 from mesa.discrete_space import OrthogonalMooreGrid
 from agents import Carrier, Giver
 import numpy as np
+from statistics import NormalDist
 
 def compute_avg_fitness(model):
     return np.average([agent.fitness for agent in model.agents])
 
 def get_population(model):
     return len(model.agents)
+
+def compute_habitability(model):
+    return model.dist.inv_cdf(1 - min(1, model.abundance/(max(len(model.agents), 1)/len(model.grid.all_cells))) * 0.5)
 
 class Fitness(Model):
     """A simple model of an ecosystem where agents eat, mate, and die.
@@ -31,7 +35,7 @@ class Fitness(Model):
         datacollector (DataCollector): Collects and stores model data
     """
 
-    def __init__(self, n=100, width=10, height=10, seed=None):
+    def __init__(self, n=100, width=10, height=10, abundance=1, mutation=True, seed=None):
         """Initialize the model.
 
         Args:
@@ -41,7 +45,10 @@ class Fitness(Model):
             seed (int, optional): Random seed. Defaults to None.
         """
         super().__init__(seed=seed)
-
+        self.dist = NormalDist(0, 1)
+        self.abundance = abundance
+        self.mutation = mutation
+        self.habitability = 0
         self.num_agents = int(n/2)
         self.grid = OrthogonalMooreGrid((width, height), random=self.random)
 
@@ -73,5 +80,6 @@ class Fitness(Model):
         self.datacollector.collect(self)
 
     def step(self):
+        self.habitability = compute_habitability(self)
         self.agents.shuffle_do("step")  # Activate all agents in random order
         self.datacollector.collect(self)  # Collect data
