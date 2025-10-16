@@ -68,7 +68,13 @@ class Carrier(Animal):
         if not self.carrying:
             choices = [obj for obj in self.cell.agents if isinstance(obj, Giver)]
             if len(choices):
-                partner = self.random.choice(choices)
+                if self.model.choosy:
+                    partner = choices[0]
+                    for choice in choices:
+                        if choice.fitness > partner.fitness:
+                            partner = choice
+                else:
+                    partner = self.random.choice(choices)
                 crossover_ratio = self.model.dist.cdf(self.random.normalvariate())
                 self.carrying = True
                 if self.model.mutation and self.random.uniform(0, 1) < 0.05:

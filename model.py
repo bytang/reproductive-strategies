@@ -19,7 +19,7 @@ def get_population(model):
     return len(model.agents)
 
 def compute_habitability(model):
-    return model.dist.inv_cdf(1 - min(1, model.abundance/(max(len(model.agents), 1)/len(model.grid.all_cells))) * 0.5)
+    return model.dist.inv_cdf(1 - min(1, model.abundance/(len(model.agents)/len(model.grid.all_cells))) * 0.5)
 
 class Fitness(Model):
     """A simple model of an ecosystem where agents eat, mate, and die.
@@ -35,7 +35,7 @@ class Fitness(Model):
         datacollector (DataCollector): Collects and stores model data
     """
 
-    def __init__(self, n=100, width=10, height=10, abundance=1, mutation=True, seed=None):
+    def __init__(self, n=100, width=10, height=10, abundance=1, mutation=True, choosy=False, seed=None):
         """Initialize the model.
 
         Args:
@@ -48,6 +48,7 @@ class Fitness(Model):
         self.dist = NormalDist(0, 1)
         self.abundance = abundance
         self.mutation = mutation
+        self.choosy = choosy
         self.habitability = 0
         self.num_agents = int(n/2)
         self.grid = OrthogonalMooreGrid((width, height), random=self.random)
