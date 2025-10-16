@@ -65,7 +65,7 @@ class Carrier(Animal):
         self.role = 'carrier'
     
     def mate(self):
-        if not self.carrying:
+        if not self.carrying and self.energy > 40:
             choices = [obj for obj in self.cell.agents if isinstance(obj, Giver)]
             if len(choices):
                 if self.model.choosy:
