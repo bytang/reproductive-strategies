@@ -944,6 +944,7 @@ dependencies = [
     { name = "seaborn" },
     { name = "solara" },
     { name = "uvicorn" },
+    { name = "vegafusion" },
 ]
 
 [package.metadata]
@@ -953,6 +954,7 @@ requires-dist = [
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "solara", specifier = ">=1.51.1" },
     { name = "uvicorn", specifier = "<0.30" },
+    { name = "vegafusion", extras = ["embed"], specifier = ">=2.0.3" },
 ]
 
 [[package]]
