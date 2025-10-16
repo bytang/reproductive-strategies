@@ -21,8 +21,11 @@ class Animal(CellAgent):
         self.parents = parents
 
     def feed(self):
-        if self.fitness > self.random.normalvariate(self.model.habitability):
-            self.energy = min(self.energy + 2, self.energy_max)
+        if self.adult:
+            if self.fitness * (1 - self.lifetime/2190) > self.random.normalvariate(self.model.habitability):
+                self.energy = min(self.energy + 2, self.energy_max)
+        else:
+            self.energy += 1
 
     def mate(self):
         """Abstract method to be implemented by subclasses."""
@@ -37,7 +40,8 @@ class Animal(CellAgent):
         """Execute one step of the animal's behavior."""
         # Move to random neighboring cell
         self.metabolism()
-        self.mate()
+        if self.adult:
+            self.mate()
         self.move()
 
         # Handle death and feeding
@@ -45,10 +49,9 @@ class Animal(CellAgent):
             self.remove()
         else:
             self.lifetime += 1
-            if self.lifetime > 30:
+            if self.lifetime > 300:
                 self.adult = True
-            if self.adult:
-                self.feed()
+            self.feed()
 
 class Carrier(Animal):
     """"""
@@ -59,7 +62,7 @@ class Carrier(Animal):
             'time': 0,
             'fitness': 0,
             'energy_reserve': 0,
-            'mature': 270,
+            'mature': 27,
             'parents': None
         }
         self.role = 'carrier'
@@ -77,7 +80,7 @@ class Carrier(Animal):
                     partner = self.random.choice(choices)
                 crossover_ratio = self.model.dist.cdf(self.random.normalvariate())
                 self.carrying = True
-                if self.model.mutation and self.random.uniform(0, 1) < 0.05:
+                if self.model.mutation and self.random.uniform(0, 1) < 0.1:
                     self.carry['fitness'] = self.random.normalvariate()
                 else:
                     self.carry['fitness'] = crossover_ratio * self.fitness + (1 - crossover_ratio) * partner.fitness

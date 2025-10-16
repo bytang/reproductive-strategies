@@ -10,16 +10,20 @@ from mesa.datacollection import DataCollector
 from mesa.discrete_space import OrthogonalMooreGrid
 from agents import Carrier, Giver
 import numpy as np
+import pandas as pd
 from statistics import NormalDist
 
 def compute_avg_fitness(model):
-    return np.average([agent.fitness for agent in model.agents])
+    if len(model.agents):
+        return np.average([agent.fitness for agent in model.agents])
+    else:
+        return pd.NA
 
 def get_population(model):
     return len(model.agents)
 
 def compute_habitability(model):
-    return model.dist.inv_cdf(1 - min(1, model.abundance/(len(model.agents)/len(model.grid.all_cells))) * 0.5)
+    return model.dist.inv_cdf(1 - min(1, model.abundance/(max(len(model.agents), 1)/len(model.grid.all_cells))) * 0.5)
 
 class Fitness(Model):
     """A simple model of an ecosystem where agents eat, mate, and die.
