@@ -1,4 +1,5 @@
 from mesa.discrete_space import CellAgent
+from scipy.stats import truncnorm
 
 class Animal(CellAgent):
     """The base animal class."""
@@ -17,7 +18,7 @@ class Animal(CellAgent):
         self.cell = cell
         self.adult = adult
         self.lifetime = 0
-        self.fitness = fitness if fitness is not None else self.random.normalvariate()
+        self.fitness = fitness if fitness is not None else truncnorm.rvs(-2, 2)
         self.parents = parents
 
     def feed(self):
@@ -81,7 +82,7 @@ class Carrier(Animal):
                 crossover_ratio = self.model.dist.cdf(self.random.normalvariate())
                 self.carrying = True
                 if self.model.mutation and self.random.uniform(0, 1) < 0.1:
-                    self.carry['fitness'] = self.random.normalvariate()
+                    self.carry['fitness'] = truncnorm.rvs(-2, 2)
                 else:
                     self.carry['fitness'] = crossover_ratio * self.fitness + (1 - crossover_ratio) * partner.fitness
                 self.carry['time'] = 0
