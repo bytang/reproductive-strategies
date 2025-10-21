@@ -1,5 +1,6 @@
 from mesa.discrete_space import CellAgent
 from scipy.stats import truncnorm
+from itertools import chain
 
 class Animal(CellAgent):
     """The base animal class."""
@@ -73,7 +74,8 @@ class Carrier(Animal):
             search_area = self.cell.get_neighborhood(radius=2, include_center=True)
             choices = []
             for cell in search_area:
-                choices = choices + [obj for obj in cell.agents if isinstance(obj, Giver)]
+                choices.append([obj for obj in cell.agents if isinstance(obj, Giver)])
+            choices = list(chain.from_iterable(choices))
             if len(choices):
                 if self.model.choosy:
                     partner = choices[0]
