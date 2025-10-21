@@ -70,7 +70,10 @@ class Carrier(Animal):
     
     def mate(self):
         if not self.carrying and self.energy > 40:
-            choices = [obj for obj in self.cell.agents if isinstance(obj, Giver)]
+            search_area = self.cell.get_neighborhood(radius=2, include_center=True)
+            choices = []
+            for cell in search_area:
+                choices = choices + [obj for obj in cell.agents if isinstance(obj, Giver)]
             if len(choices):
                 if self.model.choosy:
                     partner = choices[0]
