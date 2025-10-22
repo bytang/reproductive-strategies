@@ -116,6 +116,8 @@ class Fitness(Model):
 
         self.running = True
         self.datacollector.collect(self)
+        self.new_births = {}
+        self.new_deaths = {}
     
     def add_birth(self, agent):
         try:
