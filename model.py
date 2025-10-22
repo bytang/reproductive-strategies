@@ -19,8 +19,17 @@ def compute_avg_fitness(model):
     else:
         return pd.NA
 
-def get_population(model):
-    return len(model.agents)
+def get_births(model, key):
+    try:
+        return model.new_births[key]
+    except KeyError:
+        return 0
+
+def get_deaths(model, key):
+    try:
+        return model.new_deaths[key]
+    except KeyError:
+        return 0
 
 def compute_habitability(model):
     return model.dist.inv_cdf(1 - min(1, model.abundance/(max(len(model.agents), 1)/len(model.grid.all_cells))) * 0.5)
@@ -56,23 +65,47 @@ class Fitness(Model):
         self.habitability = 0
         self.num_agents = int(n/2)
         self.grid = OrthogonalMooreGrid((width, height), random=self.random)
+        self.new_births = {}
+        self.new_deaths = {}
 
         # Set up data collection
         self.datacollector = DataCollector(
             model_reporters={
                 "Avg Fitness": compute_avg_fitness,
                 "Population": lambda m: len(m.agents),
-                "Carriers": lambda m: len(m.agents_by_type[Carrier]),
-                "Givers": lambda m: len(m.agents_by_type[Giver]),
+                "carrier_none_pop": lambda m: len([obj for obj in m.agents_by_type[Carrier] if obj.strategy == 'none']),
+                "carrier_choosy_pop": lambda m: len([obj for obj in m.agents_by_type[Carrier] if obj.strategy == 'choosy']),
+                "giver_none_pop": lambda m: len([obj for obj in m.agents_by_type[Giver] if obj.strategy == 'none']),
+                "carrier_none_births": lambda m: get_births(m, 'carrier_none'),
+                "carrier_none_deaths": lambda m: get_deaths(m, 'carrier_none'),
+                "carrier_choosy_births": lambda m: get_births(m, 'carrier_choosy'),
+                "carrier_choosy_deaths": lambda m: get_deaths(m, 'carrier_choosy'),
+                "giver_none_births": lambda m: get_births(m, 'giver_none'),
+                "giver_none_deaths": lambda m: get_deaths(m, 'giver_none')
             },
-            agent_reporters={"Energy": "energy", "Fitness": "fitness", "Role": "role"}
+            agent_reporters={"Energy": "energy", "Fitness": "fitness", "Role": "role", "Strategy": "strategy"}
         )
-        Carrier.create_agents(
-            self,
-            self.num_agents,
-            energy=25,
-            cell=self.random.choices(self.grid.all_cells.cells, k=self.num_agents),
-        )
+        if choosy:
+            Carrier.create_agents(
+                self,
+                int(self.num_agents/2),
+                energy=25,
+                cell=self.random.choices(self.grid.all_cells.cells, k=int(self.num_agents/2)),
+            )
+            Carrier.create_agents(
+                self,
+                self.num_agents - int(self.num_agents/2),
+                strategy='choosy',
+                energy=25,
+                cell=self.random.choices(self.grid.all_cells.cells, k=self.num_agents - int(self.num_agents/2)),
+            )
+        else:
+            Carrier.create_agents(
+                self,
+                self.num_agents,
+                energy=25,
+                cell=self.random.choices(self.grid.all_cells.cells, k=self.num_agents),
+            )
 
         Giver.create_agents(
             self,
@@ -83,8 +116,22 @@ class Fitness(Model):
 
         self.running = True
         self.datacollector.collect(self)
+    
+    def add_birth(self, agent):
+        try:
+            self.new_births[agent.role + '_' + agent.strategy] += 1
+        except KeyError:
+            self.new_births[agent.role + '_' + agent.strategy] = 1
+    
+    def add_death(self, agent):
+        try:
+            self.new_deaths[agent.role + '_' + agent.strategy] += 1
+        except KeyError:
+            self.new_deaths[agent.role + '_' + agent.strategy] = 1
 
     def step(self):
         self.habitability = compute_habitability(self)
         self.agents.shuffle_do("step")  # Activate all agents in random order
         self.datacollector.collect(self)  # Collect data
+        self.new_births = {}
+        self.new_deaths = {}

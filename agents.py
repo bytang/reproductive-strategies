@@ -24,7 +24,7 @@ class Animal(CellAgent):
 
     def feed(self):
         if self.adult:
-            if self.fitness * (1 - self.lifetime/2190) > self.random.normalvariate(self.model.habitability):
+            if self.fitness - self.lifetime/1096 > self.random.normalvariate(self.model.habitability):
                 self.energy = min(self.energy + 2, self.energy_max)
         else:
             self.energy += 1
@@ -48,6 +48,7 @@ class Animal(CellAgent):
 
         # Handle death and feeding
         if self.energy <= 0:
+            self.model.add_death(self)
             self.remove()
         else:
             self.lifetime += 1
@@ -57,7 +58,7 @@ class Animal(CellAgent):
 
 class Carrier(Animal):
     """"""
-    def __init__(self, model, parents=None, fitness=None, adult=True, energy=10, cell=None):
+    def __init__(self, model, parents=None, fitness=None, adult=True, strategy='none', energy=10, cell=None):
         super().__init__(model, parents, fitness, adult, energy, cell)
         self.carrying = False
         self.carry = {
@@ -68,6 +69,8 @@ class Carrier(Animal):
             'parents': None
         }
         self.role = 'carrier'
+        self.strategy = strategy
+        self.model.add_birth(self)
     
     def mate(self):
         if not self.carrying and self.energy > 40:
@@ -77,7 +80,7 @@ class Carrier(Animal):
                 choices.append([obj for obj in cell.agents if isinstance(obj, Giver)])
             choices = list(chain.from_iterable(choices))
             if len(choices):
-                if self.model.choosy:
+                if self.strategy == 'choosy':
                     partner = choices[0]
                     for choice in choices:
                         if choice.fitness > partner.fitness:
@@ -87,9 +90,9 @@ class Carrier(Animal):
                 crossover_ratio = self.model.dist.cdf(self.random.normalvariate())
                 self.carrying = True
                 if self.model.mutation and self.random.uniform(0, 1) < 0.1:
-                    self.carry['fitness'] = truncnorm.rvs(-2, 2)
+                    self.carry['fitness'] = truncnorm.rvs(-2, 2) - max(self.lifetime - 1096, 0)/731
                 else:
-                    self.carry['fitness'] = crossover_ratio * self.fitness + (1 - crossover_ratio) * partner.fitness
+                    self.carry['fitness'] = (crossover_ratio * self.fitness + (1 - crossover_ratio) * partner.fitness) - max(self.lifetime - 1096, 0)/731
                 self.carry['time'] = 0
                 self.carry['energy_reserve'] = 0
                 self.carry['parents'] = [self.unique_id, partner.unique_id]
@@ -109,6 +112,7 @@ class Carrier(Animal):
                         self.carry['parents'],
                         self.carry['fitness'],
                         False,
+                        self.strategy,
                         self.carry['energy_reserve'],
                         self.cell
                     )
@@ -118,15 +122,18 @@ class Carrier(Animal):
                         self.carry['parents'],
                         self.carry['fitness'],
                         False,
+                        'none',
                         self.carry['energy_reserve'],
                         self.cell
                     )
 
 class Giver(Animal):
     """"""
-    def __init__(self, model, parents=None, fitness=None, adult=True, energy=10, cell=None):
+    def __init__(self, model, parents=None, fitness=None, adult=True, strategy='none', energy=10, cell=None):
         super().__init__(model, parents, fitness, adult, energy, cell)
         self.role = 'giver'
+        self.strategy = strategy
+        self.model.add_birth(self)
     
     def metabolism(self):
         self.energy -= 1
