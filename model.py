@@ -48,7 +48,7 @@ class Fitness(Model):
         datacollector (DataCollector): Collects and stores model data
     """
 
-    def __init__(self, n=100, width=10, height=10, abundance=1, mutation=True, choosy=False, seed=None):
+    def __init__(self, n=100, width=10, height=10, abundance=1, mutation=True, choosy=False, choose_delay=6, seed=None):
         """Initialize the model.
 
         Args:
@@ -62,6 +62,7 @@ class Fitness(Model):
         self.abundance = abundance
         self.mutation = mutation
         self.choosy = choosy
+        self.choose_delay = choose_delay
         self.habitability = 0
         self.num_agents = int(n/2)
         self.grid = OrthogonalMooreGrid((width, height), random=self.random)
