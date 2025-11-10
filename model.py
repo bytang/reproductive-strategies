@@ -84,7 +84,7 @@ class Fitness(Model):
                 "giver_none_births": lambda m: get_births(m, 'giver_none'),
                 "giver_none_deaths": lambda m: get_deaths(m, 'giver_none')
             },
-            agent_reporters={"Energy": "energy", "Fitness": "fitness", "Role": "role", "Strategy": "strategy"}
+            agent_reporters={"Energy": "energy", "Fitness": "fitness", "Role": "role", "Strategy": "strategy", "Age": "lifetime"}
         )
         if choosy:
             Carrier.create_agents(
