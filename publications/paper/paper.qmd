@@ -1,6 +1,6 @@
 ---
-title: Using Agent-Based Modelling to Exercise Theoretical Reasoning
-subtitle: An Exploration
+title: Using Agent-Based Modelling to Exercise Theoretical Reasoning in Social Psychology
+subtitle: An Exploration and Tutorial
 author:
   - name: Bo Yang Tang
     email: bytang@uwaterloo.ca
@@ -18,8 +18,10 @@ author:
 abstract: |
   This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
 keywords: 
-  - keyword1
-  - keyword2
+  - Social Psychology
+  - Complexity
+  - Simulation
+  - Agent-Based Modelling
 date: last-modified
 bibliography: bibliography.bib
 format:
@@ -32,9 +34,22 @@ format:
       cite-style: authoryear
 ---
 
-In recent years there has been an increasing awareness in the social sciences that producing knowledge requires more rigour and humility in the research process [@nosekReplicabilityRobustnessReproducibility2021]. 
-In the aftermath of the replication crisis, the adoption of open science practices has been enthusiastic in psychology research [@bauerPsychologicalScienceStepping2022]. 
-The areas of research that psychology researchers perceived preregistration practices benefitted the most were in the planning and application of theory, hypotheses, analysis [@sarafoglouSurveyHowPreregistration2022].
+Social psychology has a problem of complexity.
+This problem is not unique to social psychology or the social sciences [@macyFactorsActorsComputational2002], but the approaches that social psychologists use to study social psychology have had limited success [@grossmannWhenExpertPredictions2024; @opensciencecollaborationEstimatingReproducibilityPsychological2015; @muthukrishnaProblemTheory2019].
+Following the replication crisis, there has been an increased focus in the social sciences on rigour in research process, leading to the creation and adoption of open science practices [@nosekReplicabilityRobustnessReproducibility2021; @bauerPsychologicalScienceStepping2022].
+A survey of psychology researchers found that they perceived the benefits of preregistration most for planning analyses and generating hypotheses [@sarafoglouSurveyHowPreregistration2022].
+Others argued that a major reason for the replication crisis in psychology is a lack of cohesion in the theoretical foundations guiding research [@muthukrishnaProblemTheory2019].
+Recently, a large sample of experts in the social sciences participated in a survey to gather their predictions for different domains of societal change following the COVID-19 pandemic [@grossmannWhenExpertPredictions2024]. 
+They found that social scientists did not perform better than chance for this task, in contrast to previous studies that found social scientists performed better than laypeople in predicting the outcomes of laboratory experiments of these same domains [@grossmannWhenExpertPredictions2024]. 
+This gap in prediction accuracy was attributed to inadequate causal models [@grossmannWhenExpertPredictions2024].
+Together these findings suggest that social psychologists are lacking theories suitable for the complexity of social phenomena in the real world.
 
+# A Problem of Complexity
+
+Experimental designs allow us to isolate causal relationships between variables, but extending this approach to systematically define multiple aspects of a phenomenon quickly leads to a combinatorial explosion.
+Overarching theoretical frameworks are the opposite in this regard.
+Rather than having to test an impractically large space of possible hypotheses to develop comprehensive models, a theoretical framework defines a limited space of possibilities that can be supported or disproven by existing or new data [@muthukrishnaProblemTheory2019].
+The authors argue that dual inheritance theory, an evolutionary theory, is a suitable framework to guide reasoning for social behaviours [@muthukrishnaProblemTheory2019]. 
+In general, evolutionary theories are bottom-up approaches that can describe complex systems [@millerBottomupApproachClear1994].
 
 # References {-}
