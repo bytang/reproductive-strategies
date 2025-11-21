@@ -34,6 +34,8 @@ format:
       cite-style: authoryear
 ---
 
+# Background
+
 Social psychology has a problem of complexity.
 This problem is not unique to social psychology or the social sciences [@macyFactorsActorsComputational2002], but the approaches that social psychologists use to study social psychology have had limited success [@grossmannWhenExpertPredictions2024; @opensciencecollaborationEstimatingReproducibilityPsychological2015; @muthukrishnaProblemTheory2019].
 Following the replication crisis, there has been an increased focus in the social sciences on rigour in research process, leading to the creation and adoption of open science practices [@nosekReplicabilityRobustnessReproducibility2021; @bauerPsychologicalScienceStepping2022].
@@ -42,7 +44,7 @@ Others argued that a major reason for the replication crisis in psychology is a 
 Recently, a large sample of experts in the social sciences participated in a survey to gather their predictions for different domains of societal change following the COVID-19 pandemic [@grossmannWhenExpertPredictions2024]. 
 They found that social scientists did not perform better than chance for this task, in contrast to previous studies that found social scientists performed better than laypeople in predicting the outcomes of laboratory experiments of these same domains [@grossmannWhenExpertPredictions2024]. 
 This gap in prediction accuracy was attributed to inadequate causal models [@grossmannWhenExpertPredictions2024].
-Together these findings suggest that social psychologists are lacking theories suitable for the complexity of social phenomena in the real world.
+Together these findings suggest that social psychologists lack theories that encompass the complexity of social phenomena in the real world.
 
 ## A Problem of Complexity
 
@@ -57,7 +59,7 @@ Transitioning from top-down to bottom-up theories could provide social psycholog
 
 At first glance, it may seem that using bottom-up theories to understand complex systems is merely shifting the problem of understanding complexity from the system to the model itself.
 For example, evolutionary approaches to understanding human cooperation has yet to describe the breadth of cooperative behaviours observed in the real world [@henrichOriginsPsychologyHuman2021]. 
-This is an inherent challenge of using bottom-up approaches. 
-The phenomenon we are interested in becomes emergent properties of the theory rather than explicit components.
+This is an inherent challenge of a bottom-up approach. 
+The phenomenon we are interested in becomes an emergent property of the theory rather than an explicit part.
 
 # References {-}
