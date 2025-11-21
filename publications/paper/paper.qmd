@@ -61,5 +61,20 @@ At first glance, it may seem that using bottom-up theories to understand complex
 For example, evolutionary approaches to understanding human cooperation has yet to describe the breadth of cooperative behaviours observed in the real world [@henrichOriginsPsychologyHuman2021]. 
 This is an inherent challenge of a bottom-up approach. 
 The phenomenon we are interested in becomes an emergent property of the theory rather than an explicit part.
+But reorienting the phenomenon into a bottom-up view does allow for 
+
+# Agent-Based Models
+
+@macyFactorsActorsComputational2002; @axelrodEvolutionCooperation1981; @bianchiAgentbasedModelsSociology2015
+
+## Example from Social Psychology
+
+## Guidelines
+
+## Challenges
+
+# Modelling to Develop Your Theoretical Intuition
+
+# Creating and Examining a Toy Model
 
 # References {-}
