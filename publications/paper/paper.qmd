@@ -44,12 +44,20 @@ They found that social scientists did not perform better than chance for this ta
 This gap in prediction accuracy was attributed to inadequate causal models [@grossmannWhenExpertPredictions2024].
 Together these findings suggest that social psychologists are lacking theories suitable for the complexity of social phenomena in the real world.
 
-# A Problem of Complexity
+## A Problem of Complexity
 
 Experimental designs allow us to isolate causal relationships between variables, but extending this approach to systematically define multiple aspects of a phenomenon quickly leads to a combinatorial explosion.
 Overarching theoretical frameworks are the opposite in this regard.
 Rather than having to test an impractically large space of possible hypotheses to develop comprehensive models, a theoretical framework defines a limited space of possibilities that can be supported or disproven by existing or new data [@muthukrishnaProblemTheory2019].
 The authors argue that dual inheritance theory, an evolutionary theory, is a suitable framework to guide reasoning for social behaviours [@muthukrishnaProblemTheory2019]. 
-In general, evolutionary theories are bottom-up approaches that can describe complex systems [@millerBottomupApproachClear1994].
+Evolutionary theories are bottom-up approaches that can produce higher level outcomes emerging from the consequences of lower level mechanisms [@millerBottomupApproachClear1994].
+Transitioning from top-down to bottom-up theories could provide social psychology with models that describe the complexity in the real world, but this complexity becomes part of the model.
+
+## A Problem of Emergence
+
+At first glance, it may seem that using bottom-up theories to understand complex systems is merely shifting the problem of understanding complexity from the system to the model itself.
+For example, evolutionary approaches to understanding human cooperation has yet to describe the breadth of cooperative behaviours observed in the real world [@henrichOriginsPsychologyHuman2021]. 
+This is an inherent challenge of using bottom-up approaches. 
+The phenomenon we are interested in becomes emergent properties of the theory rather than explicit components.
 
 # References {-}
