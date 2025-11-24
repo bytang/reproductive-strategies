@@ -63,18 +63,47 @@ This is an inherent challenge of a bottom-up approach.
 The phenomenon we are interested in becomes an emergent property of the theory rather than an explicit part.
 But reorienting the phenomenon into a bottom-up view does allow for 
 
-# Agent-Based Models
+## Exploring Large Spaces
 
-@macyFactorsActorsComputational2002; @axelrodEvolutionCooperation1981; @bianchiAgentbasedModelsSociology2015
+We can reason about how the different variables in a model can interact, but this can miss unintuitive interactions and is limited by mathematical tools.
 
-## Example from Social Psychology
+# Simulations
 
-## Guidelines
+Systematic exploration of all possible states.
+Numeric approximations of unsolvable mathematical systems.
 
-## Challenges
+## Agent-Based Modelling
 
-# Modelling to Develop Your Theoretical Intuition
+Bridge between simulation and description.
+Individuals as the unit for interactions.
 
-# Creating and Examining a Toy Model
+## Example From Psychology
+
+# Making an ABM
+
+Going from theory to individual level behaviour rules.
+Environment details matter.
+
+## Programming Considerations
+
+Languages have differences.
+Python often used for experiments and analyzing data.
+
+# Toy Model
+
+## Creation
+
+## Analysis
+
+# Discussion
+
+## Limitations
+
+## Potential
+
+Common language of mathematics.
+Opportunity to see the potential interactions between many causal relationships.
+
+## Conclusion
 
 # References {-}

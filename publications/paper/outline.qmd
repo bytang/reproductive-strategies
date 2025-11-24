@@ -22,7 +22,8 @@ The systematic exploration of factor conditions quickly results in a combinatori
 This results in a sense of fragmentation in the literature because there is no clear way to combine the knowledge of many theories into an understanding of the whole.
 @muthukrishnaProblemTheory2019 have suggested that a solution is to develop theories under an overarching theoretical framework that provides a common set of assumptions, such as evolution and its assumptions about fitness and heredity.
 However, complexity is still present in these frameworks.
-Consider that the current evolutionary theory on human cooperation, while successful in many regards over the past several decades, is still working to cover the myriad of ways that cooperation can happen [@wilsonMultilevelCulturalEvolution2023; @henrichOriginsPsychologyHuman2021; @axelrodEvolutionCooperation1981].
+Consider that the current evolutionary accounts of human cooperation, while successful in many regards over the past several decades, only describes a subset of cooperative behaviours [@wilsonMultilevelCulturalEvolution2023; @henrichOriginsPsychologyHuman2021; @axelrodEvolutionCooperation1981].
+One reason for this gap is that complex phenomena are emergent.
 
 ## A Problem of Emergence
 
@@ -34,7 +35,8 @@ Consider that the current evolutionary theory on human cooperation, while succes
 
 ## Example From Psychology
 
-## Potential
+Common language of mathematics.
+Opportunity to see the potential interactions between many causal relationships.
 
 # Making a Model
 
@@ -42,3 +44,18 @@ Consider that the current evolutionary theory on human cooperation, while succes
 
 ## From Theory to Code
 
+# Toy Model
+
+## Creation
+
+## Analysis
+
+# Discussion
+
+## Limitations
+
+## Potential
+
+## Conclusion
+
+# References
