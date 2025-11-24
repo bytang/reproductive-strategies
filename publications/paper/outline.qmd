@@ -1,0 +1,44 @@
+---
+title: "Practicing Theory Using Agent-Based Modelling"
+author: "Bo Yang Tang"
+format: pdf
+bibliography: bibliography.bib
+---
+
+# Background
+
+Social psychology was particularly affected by the replication crisis [@opensciencecollaborationEstimatingReproducibilityPsychological2015; @camererEvaluatingReplicabilitySocial2018]. 
+Since then the adoption of open science practices among psychologists has grown year over year [@bauerPsychologicalScienceStepping2022; @nosekReplicabilityRobustnessReproducibility2021].
+While methodological problems certainly existed and likely contributed to the replication crisis [@renkewitzReplicationCrisisOpen2019], another concern is the fragmented state of theories in social psychology [@muthukrishnaProblemTheory2019].
+A study by @grossmannWhenExpertPredictions2024 found that social scientists' prediction accuracy did not translate from the lab to the real world.
+The authors suggested that social scientists need to make riskier hypotheses and to consider relevant theories outside their own because most likely any real world effects will involve many factors beyond an elegant causal model.
+Together these suggest that social psychologists have always had a problem with the complexity of social psychology.
+
+## A Problem of Complexity
+
+Research in a laboratory environment intentionally controls as many variables as possible to isolate effects to the variables under study.
+The problem comes when trying to integrate many different factors into an understanding of the real world.
+The systematic exploration of factor conditions quickly results in a combinatorial explosion.
+This results in a sense of fragmentation in the literature because there is no clear way to combine the knowledge of many theories into an understanding of the whole.
+@muthukrishnaProblemTheory2019 have suggested that a solution is to develop theories under an overarching theoretical framework that provides a common set of assumptions, such as evolution and its assumptions about fitness and heredity.
+However, complexity is still present in these frameworks.
+Consider that the current evolutionary theory on human cooperation, while successful in many regards over the past several decades, is still working to cover the myriad of ways that cooperation can happen [@wilsonMultilevelCulturalEvolution2023; @henrichOriginsPsychologyHuman2021; @axelrodEvolutionCooperation1981].
+
+## A Problem of Emergence
+
+## Exploring Large Spaces
+
+# Simulations
+
+## Agent-Based Modelling
+
+## Example From Psychology
+
+## Potential
+
+# Making a Model
+
+## Programming Considerations
+
+## From Theory to Code
+
