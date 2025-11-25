@@ -65,7 +65,7 @@ But reorienting the phenomenon into a bottom-up view does allow for
 
 ## Exploring Large Spaces
 
-We can reason about how the different variables in a model can interact, but this can miss unintuitive interactions and is limited by mathematical tools.
+We can reason about how the different variables in a model can interact, but this can miss unintuitive interactions and is limited by mathematical analysis tools.
 
 # Simulations
 
@@ -91,9 +91,18 @@ Python often used for experiments and analyzing data.
 
 # Toy Model
 
+I saw evolutionary psychology as a great fit for a beginner model because evolutionary theory focuses on individual-level interactions.
+
 ## Creation
 
+I had some familiarity with Python and knew it had good adoption among scientists.
+I was informed about the Mesa package.
+The modelling process started by implementing the most basic variables and relationship.
+
 ## Analysis
+
+We can collect data at both the individual and aggregate level for whatever properties we wish.
+Then we can see if the relationships we expect to see are supported by the data.
 
 # Discussion
 
