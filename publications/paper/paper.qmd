@@ -103,10 +103,18 @@ The modelling process started by implementing the most basic variables and relat
 
 We can collect data at both the individual and aggregate level for whatever properties we wish.
 Then we can see if the relationships we expect to see are supported by the data.
+We can also represent the rules from the code as a flowchart to illustrate all the different variables interacting to create the outcome.
 
 # Discussion
 
+Implementing a form of parental investment theory required me to consider all the variables surrounding the obvious ones.
+e.g. ability to get food affects relative population size only because the environment has a limited carrying capacity.
+e.g. if the population has high average fitness, then choosing higher fitness individuals is less necessary, at least in this model where fitness had an upper bound.
+
 ## Limitations
+
+Creating this kind of theory requires deconstructing people and thinking about incentives.
+It's not a flattering view of humanity.
 
 ## Potential
 
@@ -114,5 +122,9 @@ Common language of mathematics.
 Opportunity to see the potential interactions between many causal relationships.
 
 ## Conclusion
+
+Modelling a theory is potentially a good exercise to get a deeper understanding of the theory.
+Agent-based modelling can show outcomes of interactions between many variables.
+Using math to express ideas is an avenue for connecting theories together.
 
 # References {-}
