@@ -1,0 +1,164 @@
+---
+title: "A Taste of Agent-Based Modelling"
+author: "Bo Yang Tang"
+bibliography: bibliography.bib
+format: 
+  revealjs:
+    embed-resources: true
+    theme: serif
+
+---
+
+## Why ABMs interest me
+
+- Computer Science background
+- I like to code
+- I like to think about social issues
+
+## Psychology is complicated
+
+e.g. Communal motivation involves
+
+- Cultural continuity
+- Ostracism
+- Social embeddedness
+- Social capital
+- Commitment mechanisms
+- Social media
+- Identity fusion
+- .........
+
+## Psychology is complicated
+
+- How do we combine ideas?
+- Which effects are dominant?
+- Generalizability
+
+## Motivation
+
+- Replication crisis
+- Social scientists make poor real world predictions [@grossmannWhenExpertPredictions2024]
+- Is human behaviour too complicated for our toolkit?
+
+##
+
+::: {#fig-prediction-obstacles}
+
+![](assets/fig-prediction-obstacles.png){.nostretch fig-align="center" width="800px"}
+
+Obstacles to accurate predictions [@grossmannWhenExpertPredictions2024]
+
+:::
+
+## Where ABMs Can Help
+
+- Combining theories
+- Flexible Analyses
+- High fidelity
+- Personal development?
+
+## Parts of an Agent-based Model
+
+Environment
+
+- Network
+- Discrete grid
+- Continuous space
+
+Agents
+
+Time Step
+
+## Parts of an Agent-based Model
+
+Time 0
+
+- Generate environment
+- Generate agents and place them in the environment
+
+Time 1, 2, 3, ..., Stop
+
+- Agents activate
+- The environment can change
+
+## What to model?
+
+Evolution
+
+- Simple premise
+- Constant thread through theories
+
+
+## Implementing a simple idea
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- What is an obvious evolutionary relationship?
+- How can we show this using agents?
+:::
+
+::: {.column width="40%"}
+```{mermaid}
+flowchart LR
+  A["Fitness"] --> B["Prevalence"]
+```
+:::
+
+::::
+
+## Software
+
+- Python
+- Mesa [@terhoevenMesa3Agentbased2025]
+- pandas [@thepandasdevelopmentteamPandasdevPandasPandas2025; @mckinneyDataStructuresStatistical2010]
+- seaborn [@waskomSeabornStatisticalData2021]
+- Altair [@vanderplasAltairInteractiveStatistical2018; @satyanarayanVegaLiteGrammarInteractive2017]
+
+## How does fitness relate to prevalence?
+
+- Each agent has a fitness value
+- This fitness value has to affect the agent's reproduction
+
+## How does fitness relate to prevalence?
+
+```{.python code-line-numbers="false"}
+class Agent:
+  self.fitness
+
+  reproduce():
+    self.fitness -> probability of success
+
+  step():
+    reproduce()
+```
+
+Is simplicity the goal?
+
+## My first implementation
+
+```{.python code-line-numbers="false"}
+class Agent:
+  self.fitness
+  self.energy
+
+  feed():
+    self.fitness -> probability of +2 energy
+
+  reproduce():
+    always successful
+  
+  metabolism():
+    self.energy - 1
+  
+  step():
+    metabolism()
+    reproduce()
+    if self.energy < 0 then remove agent
+    else feed()
+```
+
+## References {-}
+
+
+
